@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { searchForMovies } from '../services/movie';
 
 function SearchBar({ query, setQuery, setMovies }) {
@@ -13,10 +12,11 @@ function SearchBar({ query, setQuery, setMovies }) {
   };
 
   return (
-    <div>
+    <section>
+      <h2>Search for a movie</h2>
       <input type="text" onChange={onChange} />
       <button onClick={findMovies}>Search</button>
-    </div>
+    </section>
   );
 }
 
