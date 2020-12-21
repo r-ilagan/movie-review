@@ -1,4 +1,13 @@
-function SearchBar({ setQuery }) {
+import { useEffect } from 'react';
+import { searchForMovies } from '../services/movie';
+
+function SearchBar({ query, setQuery, setMovies }) {
+  const findMovies = async () => {
+    await searchForMovies(query)
+      .then((data) => setMovies(data.Search))
+      .catch((error) => console.log(error));
+  };
+
   const onChange = (e) => {
     setQuery(e.target.value);
   };
@@ -6,7 +15,7 @@ function SearchBar({ setQuery }) {
   return (
     <div>
       <input type="text" onChange={onChange} />
-      <button>Search</button>
+      <button onClick={findMovies}>Search</button>
     </div>
   );
 }
