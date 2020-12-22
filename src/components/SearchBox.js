@@ -1,15 +1,18 @@
 import { searchForMovies } from '../services/movie';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 const SearchBox = ({ query, setQuery, setMovies }) => {
   const history = useHistory();
 
   const findMovies = async (e) => {
     e.preventDefault();
-    await searchForMovies(query)
-      .then((data) => setMovies(data.Search))
-      .then(() => history.push(`/s/${query}`))
-      .catch((error) => console.log(error));
+
+    if (query !== '') {
+      await searchForMovies(query)
+        .then((data) => setMovies(data.Search))
+        .then(() => history.push(`/s/${query}`))
+        .catch((error) => console.log(error));
+    }
   };
 
   const onChange = (e) => {
@@ -25,7 +28,7 @@ const SearchBox = ({ query, setQuery, setMovies }) => {
           placeholder="Search for a movie or show!"
           onChange={onChange}
         />
-        <button type="submit" class="absolute right-0 top-0 mt-5 mr-4">
+        <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
           <svg
             className="text-gray-600 h-4 w-4 fill-current"
             xmlns="http://www.w3.org/2000/svg"
