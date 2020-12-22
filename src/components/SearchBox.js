@@ -1,6 +1,6 @@
 import { searchForMovies } from '../services/movie';
 
-const SearchBar = ({ query, setQuery, setMovies }) => {
+const SearchBox = ({ query, setQuery, setMovies }) => {
   const findMovies = async (e) => {
     e.preventDefault();
     await searchForMovies(query)
@@ -13,7 +13,7 @@ const SearchBar = ({ query, setQuery, setMovies }) => {
   };
 
   return (
-    <section>
+    <section className="text-black">
       <form onSubmit={findMovies}>
         <input type="text" onChange={onChange} />
       </form>
@@ -21,4 +21,4 @@ const SearchBar = ({ query, setQuery, setMovies }) => {
   );
 };
 
-export default SearchBar;
+export default SearchBox;
