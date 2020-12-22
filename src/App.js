@@ -14,10 +14,12 @@ function App() {
       <div>
         <NavBar query={query} setQuery={setQuery} setMovies={setMovies} />
         <Switch>
-          <Route exact path="/about" component={About} />
           <Route exact path="/" component={Home} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/s/:query">
+            <Movies movies={movies} />
+          </Route>
         </Switch>
-        <Movies movies={movies} />
       </div>
     </Router>
   );
