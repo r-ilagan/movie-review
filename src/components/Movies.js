@@ -1,7 +1,9 @@
 import Movie from './Movie';
 
 const Movies = ({ movies }) => {
-  if (movies.length === 0) return null;
+  if (typeof movies === 'undefined' || movies.length === 0) {
+    return null;
+  }
 
   return (
     <article>
