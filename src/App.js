@@ -9,8 +9,6 @@ function App() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
 
-  console.log(movies);
-
   return (
     <Router>
       <div>
