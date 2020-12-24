@@ -8,16 +8,22 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
+  const [response, setResponse] = useState('FALSE');
 
   return (
     <Router>
       <div>
-        <NavBar query={query} setQuery={setQuery} setMovies={setMovies} />
+        <NavBar
+          query={query}
+          setQuery={setQuery}
+          setMovies={setMovies}
+          setResponse={setResponse}
+        />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
           <Route exact path="/s/:query">
-            <Movies movies={movies} />
+            <Movies movies={movies} response={response} />
           </Route>
         </Switch>
       </div>
