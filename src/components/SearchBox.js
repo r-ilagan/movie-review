@@ -1,7 +1,7 @@
 import { searchForMovies } from '../services/movie';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-const SearchBox = ({ query, setQuery, setMovies }) => {
+const SearchBox = ({ query, setQuery, setMovies, setResponse }) => {
   const history = useHistory();
 
   const findMovies = async (e) => {
@@ -9,7 +9,10 @@ const SearchBox = ({ query, setQuery, setMovies }) => {
 
     if (query !== '') {
       await searchForMovies(query)
-        .then((data) => setMovies(data.Search))
+        .then((data) => {
+          setMovies(data.Search);
+          setResponse(data.Response);
+        })
         .then(() => history.push(`/s/${query}`))
         .catch((error) => console.log(error));
     }
