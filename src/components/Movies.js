@@ -16,7 +16,7 @@ const Movies = ({ movies, response }) => {
 
   return (
     <article>
-      <ul>
+      <ul className="grid justify-items-center">
         {movies.map((movie) => {
           return (
             <li key={movie.imdbID}>
