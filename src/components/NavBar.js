@@ -7,7 +7,7 @@ const NavBar = ({ query, setQuery, setMovies, setResponse }) => {
   return (
     <header>
       <nav>
-        <ul className="flex px-2 py-3 items-center justify-between">
+        <ul className="flex px-2 py-3 items-center justify-center">
           <Link to="/">
             <li>
               <Logo height={20} />
