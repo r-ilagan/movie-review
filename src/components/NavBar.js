@@ -3,7 +3,7 @@ import SearchBox from './SearchBox';
 import Logo from './icons/Logo';
 import { Link } from 'react-router-dom';
 
-const NavBar = ({ query, setQuery, setMovies, setResponse }) => {
+const NavBar = ({ query, setQuery }) => {
   return (
     <header>
       <nav>
@@ -14,15 +14,10 @@ const NavBar = ({ query, setQuery, setMovies, setResponse }) => {
             </li>
           </Link>
           <li>
-            <SearchBox
-              query={query}
-              setQuery={setQuery}
-              setMovies={setMovies}
-              setResponse={setResponse}
-            />
+            <SearchBox query={query} setQuery={setQuery} />
           </li>
           <Link to="/about">
-            <li className="px-2">About</li>
+            <li className="px-2">Sign in</li>
           </Link>
         </ul>
       </nav>
