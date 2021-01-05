@@ -1,20 +1,15 @@
-import { searchForMovies } from '../services/movie';
 import { useHistory } from 'react-router-dom';
 
-const SearchBox = ({ query, setQuery, setMovies, setResponse }) => {
+const SearchBox = ({ query, setQuery }) => {
   const history = useHistory();
 
   const findMovies = async (e) => {
     e.preventDefault();
-
-    if (query !== '') {
-      await searchForMovies(query)
-        .then((data) => {
-          setMovies(data.Search);
-          setResponse(data.Response);
-        })
-        .then(() => history.push(`/s/${query}`))
-        .catch((error) => console.log(error));
+    if (query.length > 0) {
+      history.push({
+        pathname: '/find',
+        search: `?search=${query}`,
+      });
     }
   };
 
@@ -29,6 +24,7 @@ const SearchBox = ({ query, setQuery, setMovies, setResponse }) => {
           className="focus:ring-2 focus:ring-red-400 border-2 border-gray-300 bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
           type="search"
           placeholder="Search for a movie or show!"
+          value={query}
           onChange={onChange}
         />
         <button type="submit" className="absolute right-0 top-0 mt-5 mr-4">
