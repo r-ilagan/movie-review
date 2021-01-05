@@ -7,23 +7,14 @@ import { Switch, Route } from 'react-router-dom';
 
 function App() {
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState([]);
-  const [response, setResponse] = useState('FALSE');
 
   return (
     <div>
-      <NavBar
-        query={query}
-        setQuery={setQuery}
-        setMovies={setMovies}
-        setResponse={setResponse}
-      />
+      <NavBar query={query} setQuery={setQuery} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/s/:query">
-          <Movies movies={movies} response={response} />
-        </Route>
+        <Route exact path="/find" component={Movies} />
       </Switch>
     </div>
   );
