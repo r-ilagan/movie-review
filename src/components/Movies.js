@@ -1,29 +1,45 @@
+import { useState, useEffect } from 'react';
 import Movie from './Movie';
-import { useParams } from 'react-router-dom';
+import { searchForMovies } from '../services/movie';
+import { useQuery } from '../hooks';
 
-const Movies = ({ movies, response }) => {
-  const { query } = useParams();
+const Movies = () => {
+  const [shows, setShows] = useState([]);
+  const [isFetching, setFetching] = useState(true);
+  const query = useQuery();
 
-  if (response === 'FALSE') {
-    return (
-      <div className="text-center">
-        <p>
-          No results found for <span className="font-bold">"{query}"</span>
-        </p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    setFetching(true);
+    const findShows = async () => {
+      await searchForMovies(query.get('search'))
+        .then((data) => setShows(data.Search))
+        .then(() => setFetching(false));
+    };
+    findShows();
+  }, [query]);
+
+  const loading = isFetching ? (
+    <div>Loading...</div>
+  ) : (
+    <div className="text-center">
+      <p>
+        No results found for <span className="font-bold">"{query}"</span>
+      </p>
+    </div>
+  );
 
   return (
     <article>
       <ul className="grid justify-items-center">
-        {movies.map((movie) => {
-          return (
-            <li key={movie.imdbID}>
-              <Movie movie={movie} />
-            </li>
-          );
-        })}
+        {shows
+          ? shows.map((movie) => {
+              return (
+                <li key={movie.imdbID}>
+                  <Movie movie={movie} />
+                </li>
+              );
+            })
+          : loading}
       </ul>
     </article>
   );
