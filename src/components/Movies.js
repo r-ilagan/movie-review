@@ -30,7 +30,7 @@ const Movies = () => {
 
   return (
     <article>
-      <ul className="grid justify-items-center">
+      <ul className="grid md:grid-cols-3 justify-items-center">
         {shows
           ? shows.map((movie) => {
               return (
