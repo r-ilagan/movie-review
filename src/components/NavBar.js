@@ -17,7 +17,7 @@ const NavBar = ({ query, setQuery }) => {
             <SearchBox query={query} setQuery={setQuery} />
           </li>
           <Link to="/about">
-            <li className="px-2">Sign in</li>
+            <li className="px-2">About</li>
           </Link>
         </ul>
       </nav>
