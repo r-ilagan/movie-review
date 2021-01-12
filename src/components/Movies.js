@@ -1,29 +1,34 @@
 import { useState, useEffect } from 'react';
 import Movie from './Movie';
-import { searchForMovies } from '../services/movie';
+import { multiSearch } from '../services/tmdb';
 import { useQuery } from '../hooks';
+import { isObjEmpty } from '../utils';
 
 const Movies = () => {
-  const [shows, setShows] = useState([]);
+  const [response, setResponse] = useState({});
   const [isFetching, setFetching] = useState(true);
-  const query = useQuery();
+  const search = useQuery().get('search');
 
   useEffect(() => {
     setFetching(true);
     const findShows = async () => {
-      await searchForMovies(query.get('search'))
-        .then((data) => setShows(data.Search))
-        .then(() => setFetching(false));
+      await multiSearch(search)
+        .then((data) => setResponse(data))
+        .then(() => setFetching(false))
+        .catch((error) => {
+          console.log(error);
+          setFetching(false);
+        });
     };
     findShows();
-  }, [query]);
+  }, [search]);
 
   const loading = isFetching ? (
     <div>Loading...</div>
   ) : (
-    <div className="text-center">
+    <div className="col-span-3 text-center">
       <p>
-        No results found for <span className="font-bold">"{query}"</span>
+        No results found for <span className="font-bold">"{search}"</span>
       </p>
     </div>
   );
@@ -31,11 +36,11 @@ const Movies = () => {
   return (
     <article>
       <ul className="grid md:grid-cols-3 justify-items-center">
-        {shows
-          ? shows.map((movie) => {
+        {!isObjEmpty(response)
+          ? response.results.map((show) => {
               return (
-                <li key={movie.imdbID}>
-                  <Movie movie={movie} />
+                <li key={show.imdbID}>
+                  <Movie movie={show} />
                 </li>
               );
             })
