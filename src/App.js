@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import About from './components/About';
 import Home from './components/Home';
-import Movies from './components/Movies';
+import SearchPage from './components/SearchPage';
 import NavBar from './components/NavBar';
 import { Switch, Route } from 'react-router-dom';
 
@@ -14,7 +14,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/find" component={Movies} />
+        <Route exact path="/find" component={SearchPage} />
       </Switch>
     </div>
   );
