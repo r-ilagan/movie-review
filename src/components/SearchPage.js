@@ -35,11 +35,14 @@ const SearchPage = () => {
 
   return (
     <article>
-      <ul className="flex flex-col pl-4 gap-2">
+      <ul className="flex flex-col px-4 pt-2 gap-4">
         {!isObjEmpty(response)
           ? response.results.map((show) => {
               return (
-                <li key={show.id}>
+                <li
+                  key={show.id}
+                  className="bg-gradient-to-r from-gray-800 rounded-sm overflow-hidden"
+                >
                   <Show show={show} />
                 </li>
               );
